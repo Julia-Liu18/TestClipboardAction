@@ -13,7 +13,6 @@ class TestClipboardUITest: XCTestCase {
     override func setUpWithError() throws {
         app = XCUIApplication()
         app.launch()
-        print("\(app.debugDescription)")
     }
 
     override func tearDownWithError() throws {
