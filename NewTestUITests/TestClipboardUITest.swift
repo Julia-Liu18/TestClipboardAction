@@ -9,10 +9,12 @@ import XCTest
 
 class TestClipboardUITest: XCTestCase {
     var app: XCUIApplication!
+    var originalPasteboardContent: String?
 
     override func setUpWithError() throws {
         app = XCUIApplication()
         app.launch()
+        originalPasteboardContent = UIPasteboard.general.string
     }
 
     override func tearDownWithError() throws {
@@ -28,8 +30,8 @@ class TestClipboardUITest: XCTestCase {
         app.buttons["复制"].tap()
         app.wait(for: .runningForeground, timeout: 5)
         let string = UIPasteboard.general.string
-        print("Julia: \(string)")
         XCTAssertNotNil(string)
+        UIPasteboard.general.string = originalPasteboardContent
     }
 
 }
