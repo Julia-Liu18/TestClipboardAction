@@ -1,0 +1,22 @@
+name: NewTest Actions
+
+on:
+  pull_request:
+    branches: [ "dev" ]
+    
+jobs:
+  app_actions:
+    name: NewTest Github Actions
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Test NewTest iOS App
+        env:
+          platform: ${{ 'iOS Simulator' }}
+        run: |
+          device=`xcrun xctrace list devices 2>&1 | grep -oE 'iPhone.*?[^\(]+' | head -1 | awk '{$1=$1;print}' | sed -e "s/ Simulator$//"`
+          xcodebuild test -scheme NewTest -workspace NewTest.xcworkspace -destination "platform=$platform,name=$device" 
+     
+      
