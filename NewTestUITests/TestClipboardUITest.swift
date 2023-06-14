@@ -26,6 +26,7 @@ class TestClipboardUITest: XCTestCase {
         
         XCTAssertTrue(app.buttons["复制"].exists)
         app.buttons["复制"].tap()
+        app.wait(for: .runningForeground, timeout: 5)
         XCTAssertNotNil(UIPasteboard.general.string)
     }
 
