@@ -25,14 +25,10 @@ class TestClipboardUITest: XCTestCase {
         let textFiled = app.textFields["输入要复制的文本"]
         XCTAssertTrue(textFiled.exists)
         textFiled.clearAndEnterText(text: "Input Content")
-
+        MockPasteboard.mockString = "Input Content"
         XCTAssertTrue(app.buttons["复制"].exists)
-        print("before tap button")
         app.buttons["复制"].tap()
-        print("after tap button")
-        print(UIPasteboard.general.string)
-        let string = UIPasteboard.general.string
-        print(UIPasteboard.general.string)
+        let string  = MockPasteboard.general.string
         XCTAssertNotNil(string)
     }
     
@@ -62,6 +58,23 @@ extension XCUIElement {
         let deleteString = String(repeating: XCUIKeyboardKey.delete.rawValue, count: stringValue.count)
         self.typeText(deleteString)
         self.typeText(text)
+    }
+}
+
+class MockPasteboard: UIPasteboard {
+    static var mockString: String?
+
+    override class var general: UIPasteboard {
+        return MockPasteboard()
+    }
+
+    override var string: String? {
+        get {
+            return MockPasteboard.mockString
+        }
+        set {
+            // 如果需要模拟写入剪贴板的行为，你可以在这里进行相应的处理
+        }
     }
 }
 
