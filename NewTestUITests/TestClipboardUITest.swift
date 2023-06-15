@@ -45,6 +45,7 @@ class TestClipboardUITest: XCTestCase {
         let clipboardContent = UIPasteboard.general.string
         textFiled.clearAndEnterText(text: "Input Content 2")
         XCTAssertEqual(clipboardContent, expectedText)
+        XCTAssertNotNil(clipboardContent)
     }
 
 }
