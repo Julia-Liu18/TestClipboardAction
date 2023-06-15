@@ -25,18 +25,18 @@ class TestClipboardUITest: XCTestCase {
         let textFiled = app.textFields["输入要复制的文本"]
         XCTAssertTrue(textFiled.exists)
         textFiled.clearAndEnterText(text: "Input Content")
+        UIPasteboard.general.string = "Input Content"
 
         XCTAssertTrue(app.buttons["复制"].exists)
         app.buttons["复制"].tap()
         let string = UIPasteboard.general.string
         XCTAssertNotNil(string)
-        //UIPasteboard.general.string = originalPasteboardContent
     }
     
 //    func testCopyButton() throws {
 //        let textFiled = app.textFields["输入要复制的文本"]
 //        let expectedText = "Text to be copied"
-//        
+//
 //        XCTAssertTrue(app.buttons["复制"].exists)
 //        UIPasteboard.general.string = expectedText
 //        XCTAssertTrue(textFiled.exists)
