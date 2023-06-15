@@ -34,7 +34,6 @@ class TestClipboardUITest: XCTestCase {
         let string = UIPasteboard.general.string
         print(UIPasteboard.general.string)
         XCTAssertNotNil(string)
-        
     }
     
 //    func testCopyButton() throws {
