@@ -27,10 +27,11 @@ class TestClipboardUITest: XCTestCase {
         textFiled.clearAndEnterText(text: "Input Content")
 
         XCTAssertTrue(app.buttons["复制"].exists)
-        print(UIPasteboard.general.string)
+        print("before tap button")
         app.buttons["复制"].tap()
-        sleep(15)
+        print(UIPasteboard.general.string)
         let string = UIPasteboard.general.string
+        print(UIPasteboard.general.string)
         XCTAssertNotNil(string)
     }
     
